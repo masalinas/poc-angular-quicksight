@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   contentOptions: QuickSightEmbedding.QSE.ContentOptions;
   embeddingContext: QuickSightEmbedding.QSE.EmbeddingContext;
   dashboardFrame : QuickSightEmbedding.QSE.DashboardFrame;
-  dashboardURL: string = "https://eu-west-2.quicksight.aws.amazon.com/sn/accounts/040033045351/dashboards/75e780a3-6073-4b6c-b473-3cd201a53e24?directory_alias=quicksight-hmrc-pro";
+  dashboardURL: string = "MY_DASHBOARD_URI";
 
   async ngOnInit() {
     this.frameOptions = {
