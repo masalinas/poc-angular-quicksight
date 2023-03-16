@@ -1,8 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
-import { createEmbeddingContext } from 'amazon-quicksight-embedding-sdk';
 import * as QuickSightEmbedding from 'amazon-quicksight-embedding-sdk';
-
 
 @Component({
   selector: 'app-root',
@@ -12,18 +10,21 @@ import * as QuickSightEmbedding from 'amazon-quicksight-embedding-sdk';
 export class AppComponent implements OnInit {
   title = 'poc-angular-quicksight';
 
-  @ViewChild('quicksight') iframe: any;
+  containerDiv: any;
 
   frameOptions: QuickSightEmbedding.QSE.FrameOptions;
   contentOptions: QuickSightEmbedding.QSE.ContentOptions;
   embeddingContext: QuickSightEmbedding.QSE.EmbeddingContext;
   dashboardFrame : QuickSightEmbedding.QSE.DashboardFrame;
-  dashboardURL: string = "https://eu-west-2.quicksight.aws.amazon.com/sn/accounts/040033045351/dashboards/75e780a3-6073-4b6c-b473-3cd201a53e24?directory_alias=quicksight-hmrc-pro";
+
+  dashboardURL: string = "MY_DASHBOARD_URI";
 
   async ngOnInit() {
+    this.containerDiv = document.getElementById("dashboardContainer");
+
     this.frameOptions = {
       url: this.dashboardURL, 
-      container: this.iframe,
+      container: this.containerDiv,
       width: '100%',
       height: '100%',
       onChange: (changeEvent, metadata) => {
@@ -107,7 +108,7 @@ export class AppComponent implements OnInit {
     }
     }
 
-    this.embeddingContext = await createEmbeddingContext({
+    this.embeddingContext = await QuickSightEmbedding.createEmbeddingContext({
       onChange: (changeEvent) => {
           console.log('Context received a change', changeEvent);
       },
