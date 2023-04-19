@@ -16,17 +16,16 @@ export class AppComponent implements OnInit {
   contentOptions: QuickSightEmbedding.QSE.ContentOptions;
   embeddingContext: QuickSightEmbedding.QSE.EmbeddingContext;
   dashboardFrame : QuickSightEmbedding.QSE.DashboardFrame;
-
-  dashboardURL: string = "MY_DASHBOARD_URI";
+  dashboardURL: string = "https://eu-west-2.quicksight.aws.amazon.com/embed/124796bdf9b24609bcbf68b75ce6ffda/dashboards/75e780a3-6073-4b6c-b473-3cd201a53e24?code=AYABeFzhfk2MSrcSYVf4Wpo3xQkAAAABAAdhd3Mta21zAEthcm46YXdzOmttczpldS13ZXN0LTI6NjQ5MTA0MjA5NDE4OmtleS9lZGQ0ZjBlNC03M2U0LTQ4NGEtYjBmYy0yYjEzNDI0YThlODUAuAECAQB4PzZ65b9Ymmq2TEsvgSjBFtVfn3zhydm1pFtLkt4ms00Bl7_FavO7md_-tnqXHvJVVAAAAH4wfAYJKoZIhvcNAQcGoG8wbQIBADBoBgkqhkiG9w0BBwEwHgYJYIZIAWUDBAEuMBEEDN3B5kQUwFFC3nbjAwIBEIA7kzsJHRwhPLJxJgIHNVlhgBdz-yDN4hbcQMkfe4gvS3obSWbFN9B7RTWXfu30nqbEaBzzjs-Yhnhyuk8CAAAAAAwAABAAAAAAAAAAAAAAAAAAh1Ww791e4zw_BTbswDBSsv____8AAAABAAAAAAAAAAAAAAABAAAAm0LQ3OJNIabAZUEpYVvrS5c-jYJTOqze3Bo4HSQjGH8xNtPgNcBNriYDsG4TNdCfJ3_FeLzpxqoQepMxZhUJiAJh-nT9f-NHKChpPkeXvvAsElRtR0pa28o_igUiN8jdSFow74B61XRGGAs00le46_2MAKMIOW5ILNEyE-juxO6bqprGkDuTRgZZPgh_LlTKflvBLHDY-6vkpe1U6mgVa1Cd9Ndb49s3b2AuEw%3D%3D&identityprovider=quicksight&isauthcode=true";
 
   async ngOnInit() {
     this.containerDiv = document.getElementById("dashboardContainer");
 
     this.frameOptions = {
       url: this.dashboardURL, 
-      container: this.containerDiv,
+      container: this.containerDiv,      
       width: '100%',
-      height: '100%',
+      height: '700px',
       onChange: (changeEvent, metadata) => {
         if (changeEvent.eventLevel === 'ERROR') {
             console.log(`Do something when embedding experience failed with "${changeEvent.eventName}"`);
@@ -112,12 +111,12 @@ export class AppComponent implements OnInit {
       onChange: (changeEvent) => {
           console.log('Context received a change', changeEvent);
       },
-   });
+    });
 
-   this.dashboardFrame = await this.embeddingContext.embedDashboard(this.frameOptions, this.contentOptions);
+    this.dashboardFrame = await this.embeddingContext.embedDashboard(this.frameOptions, this.contentOptions);
   }
 
-  onDashboard(evebt: any) {
+  onDashboard(event: any) {
     console.log("Hello Dashboard");
   }  
 }
